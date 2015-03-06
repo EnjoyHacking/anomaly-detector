@@ -21,7 +21,7 @@ import com.cloudera.oryx.lambda.serving.ServingModelManager;
 import java.io.IOException;
 import java.util.Iterator;
 
-public final class AnomalyServingModelManager implements ServingModelManager<String> {
+public final class RpcaServingModelManager implements ServingModelManager<String> {
 
   @Override
   public void consume(Iterator<KeyMessage<String,String>> updateIterator) throws IOException {

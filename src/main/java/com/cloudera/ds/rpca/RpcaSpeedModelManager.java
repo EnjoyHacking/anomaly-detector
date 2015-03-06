@@ -22,7 +22,7 @@ import org.apache.spark.api.java.JavaPairRDD;
 import java.io.IOException;
 import java.util.Iterator;
 
-public final class AnomalySpeedModelManager implements SpeedModelManager<String,String,String> {
+public final class RpcaSpeedModelManager implements SpeedModelManager<String,String,String> {
 
   @Override
   public void consume(Iterator<KeyMessage<String,String>> updateIterator) throws IOException {

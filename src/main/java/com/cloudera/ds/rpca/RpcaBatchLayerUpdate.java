@@ -22,7 +22,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 
 import java.io.IOException;
 
-public final class AnomalyBatchLayerUpdate implements BatchLayerUpdate<String, String, String> {
+public final class RpcaBatchLayerUpdate implements BatchLayerUpdate<String, String, String> {
 
   @Override
   public void runUpdate(JavaSparkContext sparkContext,
