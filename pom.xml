@@ -14,12 +14,17 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cloudera.ds</groupId>
-    <artifactId>anomaly-detector</artifactId>
+    <artifactId>anomaly</artifactId>
     <packaging>jar</packaging>
     <name>Anomaly Detector</name>
     <description>A simple anomaly detector built with Oryx.</description>
     <version>1.0.0-SNAPSHOT</version>
     <properties>
+        <!-- Maven settings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Dependency versions -->
+        <java.version>1.7</java.version>
         <oryx.version>2.0.0-alpha-1</oryx.version>
     </properties>
 
@@ -40,7 +45,11 @@
             <groupId>com.cloudera.oryx</groupId>
             <artifactId>oryx-app-api</artifactId>
             <scope>provided</scope>
-            <!-- Set this to the version of Oryx you use -->
+            <version>${oryx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cloudera.oryx</groupId>
+            <artifactId>oryx-lambda</artifactId>
             <version>${oryx.version}</version>
         </dependency>
     </dependencies>
@@ -51,6 +60,14 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
