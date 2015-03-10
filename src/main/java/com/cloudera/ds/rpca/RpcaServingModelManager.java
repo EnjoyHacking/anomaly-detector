@@ -13,7 +13,7 @@
  * License.
  */
 
-package java.com.cloudera.ds.anomaly;
+package com.cloudera.ds.rpca;
 
 import com.cloudera.oryx.lambda.KeyMessage;
 import com.cloudera.oryx.lambda.serving.ServingModelManager;
@@ -22,17 +22,14 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public final class RpcaServingModelManager implements ServingModelManager<String> {
-
   @Override
   public void consume(Iterator<KeyMessage<String,String>> updateIterator) throws IOException {
 
   }
-
   @Override
   public Object getModel() {
     return null;
   }
-
   @Override
   public void close() {
 

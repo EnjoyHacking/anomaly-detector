@@ -13,7 +13,7 @@
  * License.
  */
 
-package java.com.cloudera.ds.anomaly;
+package com.cloudera.ds.rpca;
 
 import com.cloudera.oryx.lambda.BatchLayerUpdate;
 import com.cloudera.oryx.lambda.TopicProducer;
@@ -23,7 +23,6 @@ import org.apache.spark.api.java.JavaSparkContext;
 import java.io.IOException;
 
 public final class RpcaBatchLayerUpdate implements BatchLayerUpdate<String, String, String> {
-
   @Override
   public void runUpdate(JavaSparkContext sparkContext,
                         long timestamp,

@@ -13,7 +13,7 @@
  * License.
  */
 
-package java.com.cloudera.ds.anomaly;
+package com.cloudera.ds.rpca;
 
 import com.cloudera.oryx.lambda.KeyMessage;
 import com.cloudera.oryx.lambda.speed.SpeedModelManager;
@@ -23,17 +23,14 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public final class RpcaSpeedModelManager implements SpeedModelManager<String,String,String> {
-
   @Override
   public void consume(Iterator<KeyMessage<String,String>> updateIterator) throws IOException {
 
   }
-
   @Override
   public void close() {
 
   }
-
   @Override
   public Iterable<String> buildUpdates(JavaPairRDD<String,String> newData) {
     return null;
