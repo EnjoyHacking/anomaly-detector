@@ -7,7 +7,8 @@ on Robust Principal Component Analysis. Robust Principal Component Analysis
 seeks to decompose a matrix into a low rank component and a sparse component.
 The sparse component is the part of interest for us, those are the anomolous
 inputs! We will find this decomposition using the principal component pursuit
-algorithm defined in [Candes Et al.](http://statweb.stanford.edu/~candes/papers/RobustPCA.pdf).
+algorithm defined in [Candes Et al.](http://statweb.stanford.edu/~candes/papers/RobustPCA.pdf)
+and [here](http://perception.csl.illinois.edu/matrix-rank/Files/RPCA_JACM.pdf).
 
 The gist of principal component pursuit is that we are trying to decompose a matrix M in to its
 low rank component L and its sparse component S, M = L + S. Traditional PCA is easily corrupted by
