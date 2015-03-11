@@ -47,11 +47,6 @@
             <scope>provided</scope>
             <version>${oryx.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.cloudera.oryx</groupId>
-            <artifactId>oryx-lambda</artifactId>
-            <version>${oryx.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
