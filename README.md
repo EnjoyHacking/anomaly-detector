@@ -20,7 +20,7 @@ Anomaly Detection](http://211.68.127
     0) Form the matrix of observations. Eventually, this implementation should include robust
     feature selection.
     1) Compute the first k approximation of the robust Principal Components (PCs) and their
-   variances.
+    variances.
     2) Calculate the Score Distance (Mahalanobis distance in the PC space) and the Orthogonal
     Distance (error after subtracting projection of input onto low dim PC space).
     3) Calculate appropriate thresholds for the score and orthogonal distances.
@@ -80,7 +80,7 @@ robustly estomated eigenvector-like vectors a_{i} by maximizing:
     lambda_{k} = max_{set of search directions} S(~ stuff from previous step ~)
 
 Instead of optimizing over the space of all possible solutions, a set of candidate directions are
- chosen and the direction with the max robust variance estimate is chosen.
+chosen and the direction with the max robust variance estimate is chosen.
 
 
 # How is this done in Oryx?
