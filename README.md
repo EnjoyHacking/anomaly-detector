@@ -15,16 +15,17 @@ and [here](http://perception.csl.illinois.edu/matrix-rank/Files/RPCA_JACM.pdf).
 
 We can follow the form outlined in [Robust Feature Selection and Robust PCA for Internet Traffic
 Anomaly Detection](http://211.68.127
-.238/classes/For11Course/class14/1/POVF12.pdf) on page 6.
+.238/classes/For11Course/class14/1/POVF12.pdf) on page 6:
 
-0) Form the matrix of observations. Eventually, this implementation should include robust feature
-selection.
-1) Compute the first k approximation of the robust Principal Components (PCs) and their variances.
-2) Calculate the Score Distance (Mahalanobis distance in the PC space) and the Orthogonal Distance
- (error after subtracting projection of input onto low dim PC space).
-3) Calculate appropriate thresholds for the score and orthogonal distances.
-4) Label an observation as an anomaly if either the score distance of orthogonal distance for that
-observations exceeds the corresponding threshold.
+    0) Form the matrix of observations. Eventually, this implementation should include robust
+    feature selection.
+    1) Compute the first k approximation of the robust Principal Components (PCs) and their
+   variances.
+    2) Calculate the Score Distance (Mahalanobis distance in the PC space) and the Orthogonal
+    Distance (error after subtracting projection of input onto low dim PC space).
+    3) Calculate appropriate thresholds for the score and orthogonal distances.
+    4) Label an observation as an anomaly if either the score distance of orthogonal distance for
+     that observations exceeds the corresponding threshold.
 
 
 ## Computing Robust Principal Components
