@@ -17,34 +17,40 @@ We can follow the form outlined in [Robust Feature Selection and Robust PCA for 
 Anomaly Detection](http://211.68.127
 .238/classes/For11Course/class14/1/POVF12.pdf) on page 6:
 
-    0) Form the matrix of observations. Eventually, this implementation should include robust
-    feature selection.
-    1) Compute the first k approximation of the robust Principal Components (PCs) and their
-    variances.
-    2) Calculate the Score Distance (Mahalanobis distance in the PC space) and the Orthogonal
-    Distance (error after subtracting projection of input onto low dim PC space).
+    0) Form the matrix of observations. Eventually, this implementation should include
+       robust feature selection.
+    1) Compute the first k approximation of the robust Principal Components (PCs) and
+       their variances.
+    2) Calculate the Score Distance (Mahalanobis distance in the PC space) and the
+       Orthogonal Distance (error after subtracting projection of input onto low dim
+       PC space).
     3) Calculate appropriate thresholds for the score and orthogonal distances.
-    4) Label an observation as an anomaly if either the score distance of orthogonal distance for
-     that observations exceeds the corresponding threshold.
+    4) Label an observation as an anomaly if either the score distance of orthogonal
+       distance for that observations exceeds the corresponding threshold.
 
 
 ## Computing Robust Principal Components
 
 The gist of principal component pursuit is that we are trying to decompose a matrix M in to its
-low rank component L and its sparse component S, so that M = L + S. Traditional PCA is easily
-corrupted by outliers in the matrix. In PCA used for dimensionality reduction we usually think of
-retrieving the low rank approximation where M = L + N, L is the low rank approximation fo M
+low rank component L and its sparse component S, so that M = L + S. Standard PCA is easily
+corrupted by outliers in the matrix. In PCA used for dimensionality reduction we usually think
+of retrieving the low rank approximation where M = L + N, L is the low rank approximation fo M
 using the top K singular vectors and N is made up of small noise. In the sparse situation,
 components of S can have arbitrarily large magnitude but are distributed among the indices of the
 matrix in a sparse way.
 
+### Optimization/Relaxation based
+
 The first algorithm described for robustly computing the principal components of a matrix in the
 presence of sparse noise was framed as an optimization problem where we seek to minimize
+
     ||L||_{Nuclear Norm} + \lambda||S||_{1}
+
 subject to the constraint that L+S=M. This problem can be solved with optimization methods that
 are very computationally intensive.
 
 ### Alternating Directions
+
 [Sparse and Low-Rank Matrix Decompositions via Alternating Directions Methods, Yuan and Yang]
 (http://www.optimization-online.org/DB_FILE/2009/11/2447.pdf) describes a method for soling the
 optimization problem specified above by separating it in to two different minimization problems that
@@ -75,13 +81,19 @@ computing a robust pc estimate in the face of sparse anomalous entries.
 The next step in the PCA-like algorithm is to subtract off the "center" of the data, where the
 "center" is computers in a robust way -- like the L_{1} median or the coordinate-wise median.
 Once the data is appropriately centered, this algorithm iteratively builds out its collection of
-robustly estomated eigenvector-like vectors a_{i} by maximizing:
+robustly estimated eigenvector-like vectors a_{i} by maximizing:
 
     lambda_{k} = max_{set of search directions} S(~ stuff from previous step ~)
 
 Instead of optimizing over the space of all possible solutions, a set of candidate directions are
 chosen and the direction with the max robust variance estimate is chosen.
 
+# Grassman Averages for Robust PCA
+[Grassman Averages for Scalable Robust PCA](http://files.is.tue.mpg.de/black/papers/RGA2014.pdf)
+provides a method for doing robust PCA. Grassman averages are a method for averaging together
+linear subspaces. We treat each observation as its own linear subspace that needs to be averaged
+together with other observations to obtain an estimate of a singular vector. This is pretty clever
+and I want to give it a try first.
 
 # How is this done in Oryx?
 
@@ -93,9 +105,12 @@ Components Pursuit](http://arxiv.org/pdf/1010.0608v3.pdf)
 describes an algorithm for streaming sparse signal detection as well as a method for
 continuously updating your estimates of the singular values. It seems best to build this
 incrementally, first building the batch and serving layers and seeing how that works on
-real data. Then implementing noise corrected robust pca as well as the continuous model
-update portion of the algorithm if we need improvements or are having trouble separating the
-sparse component from the low rank one.
+real data.  If we need improvements or are having trouble separating the
+sparse component from the low rank one, we can try to improve our model by implementing
+noise corrected robust pca as well as the continuous model update portion of the algorithm. I think [divide and
+conquer matrix factorization]
+(http://www.cs.berkeley.edu/~ameet/dfc.pdf) or some variant
+of it may work well.
 
 The current focus of this implementation is on batch model building and streaming scoring. This
 may be extended later.
@@ -106,9 +121,8 @@ should also do some tuning to determine the best threshold for both distance mea
 
 ## Serving Model Manager
 The model applied at serving time will need to be able to take an observation, calculate the score
- distance and the orthogonal distance using the precomputed principal components. It will then
- need to compare these distances to their corresponding thresholds.
+distance and the orthogonal distance using the precomputed principal components. It will then
+need to compare these distances to their corresponding thresholds.
 
 ## Speed Model Manager
-Not worrying about this yet. I think [divide and conquer matrix factorization](http://www.cs.berkeley.edu/~ameet/dfc.pdf) or some variant
-of it may work well.
+Not worrying about this yet.
